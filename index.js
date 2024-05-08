@@ -1,9 +1,10 @@
-function isAnagram(s, t) {
-  if (s.length !== t.length) return false;
-  const count = Array(26).fill(0);
-  for (let i = 0; i < s.length; i++) {
-    count[s.charCodeAt(i) - 97]++;
-    count[t.charCodeAt(i) - 97]--;
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
-  return count.every((c) => c === 0);
+  return false;
 }
