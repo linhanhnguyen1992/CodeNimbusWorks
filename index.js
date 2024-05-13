@@ -1,13 +1,24 @@
-const fibonacci = (n) => {
-  if (n <= 1) {
-    return n;
+const mergeSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
   }
-  let prev = 0;
-  let curr = 1;
-  for (let i = 2; i <= n; i++) {
-    const next = prev + curr;
-    prev = curr;
-    curr = next;
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
+};
+const merge = (left, right) => {
+  let result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(right[rightIndex]);
+      rightIndex++;
+    }
   }
-  return curr;
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 };
